@@ -1,0 +1,33 @@
+:root {
+    --main-color-background: #101010;
+    --main-color-comments: #797979;
+    --main-color-white: #d6d6d6;
+    --main-color-yellow: #e5b567;
+    --main-color-green: #b4d273;
+    --main-color-orange: #e87d3e;
+    --main-color-purple: #9e86c8;
+    --main-color-pink: #b05279;
+    --main-color-blue: #6c99bb;
+    --main-color-high: #ff838e;
+}
+
+body {
+    font-family: monospace;
+    font-size: x-small;
+    color: var(--main-color-white);
+    background-color: var(--main-color-background)
+}
+h1 {
+    text-align: center;
+    color: var(--main-color-orange);
+}
+
+.media-item {
+    margin: 10px;
+    display: inline-block;
+}
+
+img, video {
+    max-width: 300px;
+    max-height: 300px;
+}

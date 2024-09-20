@@ -3,7 +3,11 @@
 from flask import Flask, request, send_from_directory, jsonify
 import os
 
-app = Flask(__name__)
+app = Flask(
+    __name__,
+    static_url_path='',
+    static_folder="static/"
+    )
 
 # Folder to serve media files from
 MEDIA_FOLDER = 'media'
