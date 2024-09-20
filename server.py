@@ -23,6 +23,10 @@ def get_media_files(directory):
         })
     return media_files
 
+@app.route('/')
+def index():
+    return send_from_directory('templates', 'index.html')
+
 # Route to serve media files
 @app.route('/media/<path:filepath>')
 def media(filepath):
