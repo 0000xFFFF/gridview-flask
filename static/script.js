@@ -23,7 +23,7 @@ fetch('/media-list')
                     const img = document.createElement('img');
                     img.src = `/media/${dir.path === '.' ? '' : dir.path + '/'}${file}`;
                     mediaFile.appendChild(img);
-                } else if (file.endsWith('.mp4') || file.endsWith('.mov') || file.endsWith('.avi')) {
+                } else if (file.endsWith('.mp4') || file.endsWith('.webm') || file.endsWith('.mov') || file.endsWith('.avi')) {
                     const video = document.createElement('video');
                     video.src = `/media/${dir.path === '.' ? '' : dir.path + '/'}${file}`;
                     video.controls = true;
