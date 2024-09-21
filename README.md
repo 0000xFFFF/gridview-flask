@@ -10,10 +10,8 @@
 ./install.sh
 ```
 
-## Requirements
+## Requirements - pip
 * flask
-* pyopenssl
-* flask_sslify
 
 # Running
 ```
