@@ -17,3 +17,6 @@
 ```
 gridview        # inside the dir you want to view media files
 ```
+# Usage
+Open https://127.0.0.1:5000
+
