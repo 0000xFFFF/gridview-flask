@@ -1,6 +1,6 @@
 :root {
     --main-color-background: #101010;
-    --main-color-comments: #797979;
+    --main-color-comments: #151515;
     --main-color-white: #d6d6d6;
     --main-color-yellow: #e5b567;
     --main-color-green: #b4d273;
@@ -13,16 +13,24 @@
 
 body {
     font-family: monospace;
-    font-size: x-small;
     color: var(--main-color-white);
     background-color: var(--main-color-background)
 }
 h1 {
-    text-align: center;
+    text-align: left;
     color: var(--main-color-orange);
+    border-bottom: 2px solid var(--main-color-blue);
+    padding: 3px 3px 3px 10px;
+    margin: 0;
 }
 
-.media-item {
+.media-dir {
+    background-color: var(--main-color-comments);
+    border: 1px solid var(--main-color-blue);
+    margin: 2px;
+}
+
+.media-file {
     margin: 10px;
     display: inline-block;
 }
