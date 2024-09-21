@@ -2,19 +2,20 @@
 
 from flask import Flask, request, send_from_directory, jsonify
 import os
+import argparse
+
+dir_script = os.path.dirname(os.path.realpath(__file__))
+dir_templates = os.path.join(dir_script, "templates")
+dir_static = os.path.join(dir_script, "static")
 
 app = Flask(
     __name__,
     static_url_path='',
-    static_folder="static/"
+    static_folder=dir_static
     )
 
 # Folder to serve media files from
-MEDIA_FOLDER = 'media'
-
-# Ensure the media folder exists
-if not os.path.exists(MEDIA_FOLDER):
-    os.makedirs(MEDIA_FOLDER)
+MEDIA_FOLDER = os.getcwd()
 
 # Helper function to get all media files recursively
 def get_media_files(directory):
@@ -27,9 +28,11 @@ def get_media_files(directory):
         })
     return media_files
 
+
+
 @app.route('/')
 def index():
-    return send_from_directory('templates', 'index.html')
+    return send_from_directory(dir_templates, 'index.html')
 
 # Route to serve media files
 @app.route('/media/<path:filepath>')
