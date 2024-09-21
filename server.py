@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+
+# TODO: add display paging
+# TODO: video loading is slow -- maybe cache thumbnails
+# TODO: add 'view file page' when file is clicked to see it's details
+
 from flask import Flask, send_from_directory, jsonify
 import os
 
@@ -16,6 +21,11 @@ app = Flask(
 # Folder to serve media files from
 MEDIA_FOLDER = os.getcwd()
 
+extensions = [
+    '.png', '.jpg', '.jpeg', '.gif',
+    '.mp4', ".webm", '.mov', '.avi',
+]
+
 
 # Helper function to get all media files recursively
 def get_media_files(directory):
@@ -24,7 +34,7 @@ def get_media_files(directory):
         relative_path = os.path.relpath(root, MEDIA_FOLDER)
         media_files.append({
             'path': relative_path,
-            'files': [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.mp4', ".webm", '.mov', '.avi'))]
+            'files': [f for f in files if f.lower().endswith(tuple(extensions))]
         })
     return media_files
 

@@ -15,4 +15,4 @@ else
     echo "Inside a virtual environment. Proceeding..."
 fi
 
-sudo python "$SCRIPT_DIR/server.py"
+python "$SCRIPT_DIR/server.py"
