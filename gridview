@@ -1,50 +1,18 @@
-#!/usr/bin/env python
+#!/bin/bash
 
-from flask import Flask, request, send_from_directory, jsonify
-import os
-import argparse
+# Resolve the symlink and get the absolute path of the script
+SCRIPT_PATH=$(readlink -f "$0")
 
-dir_script = os.path.dirname(os.path.realpath(__file__))
-dir_templates = os.path.join(dir_script, "templates")
-dir_static = os.path.join(dir_script, "static")
+# Get the directory where the script is located
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 
-app = Flask(
-    __name__,
-    static_url_path='',
-    static_folder=dir_static
-    )
+source "$SCRIPT_DIR/p3env/bin/activate"
 
-# Folder to serve media files from
-MEDIA_FOLDER = os.getcwd()
+if [ -z "$VIRTUAL_ENV" ]; then
+    echo "Not inside a virtual environment. Exiting..."
+    exit 1
+else
+    echo "Inside a virtual environment. Proceeding..."
+fi
 
-# Helper function to get all media files recursively
-def get_media_files(directory):
-    media_files = []
-    for root, dirs, files in os.walk(directory):
-        relative_path = os.path.relpath(root, MEDIA_FOLDER)
-        media_files.append({
-            'path': relative_path,
-            'files': [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.mp4', '.mov', '.avi'))]
-        })
-    return media_files
-
-
-
-@app.route('/')
-def index():
-    return send_from_directory(dir_templates, 'index.html')
-
-# Route to serve media files
-@app.route('/media/<path:filepath>')
-def media(filepath):
-    return send_from_directory(MEDIA_FOLDER, filepath)
-
-# Route to get list of all media files recursively
-@app.route('/media-list')
-def media_list():
-    files = get_media_files(MEDIA_FOLDER)
-    return jsonify(files)
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
+sudo python "$SCRIPT_DIR/server.py"
