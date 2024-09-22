@@ -39,11 +39,12 @@ def get_media_dims(full_file_path):
         width, height = im.size
         return width, height
 
-    if full_file_path.lower().endswith(tuple(exts_videos)):
-        vid = cv2.VideoCapture(file_path)
-        width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
-        height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
-        return width, height
+    # ignore video for now
+    # if full_file_path.lower().endswith(tuple(exts_videos)):
+    #     vid = cv2.VideoCapture(full_file_path)
+    #     width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
+    #     height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    #     return width, height
 
     return None, None
 
