@@ -101,7 +101,7 @@ fetch('/media-list')
                     // TODO: make thumbnail instead -- when clicked turn it into video
                 }
                 else {
-                    // todo: handle other file types maybe?
+                    // TODO: handle other file types maybe?
                 }
 
                 div_dir_files.appendChild(div_file);

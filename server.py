@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 
-
-# TODO: add display paging
+# TODO: add display paging -- endless scrolling
 # TODO: video loading is slow -- maybe cache thumbnails
 # TODO: add 'view file page' when file is clicked to see it's details
-# TODO: or add file info on hover with mouse
-# TODO: add image resize like RES
+# TODO: new setting: change sorting order
+# TODO: new setting: change column count
 
 import os
 from flask import Flask, send_from_directory, jsonify
@@ -65,6 +64,7 @@ def list_media_files(root, files):
             })
     
     # show biggest files first by WIDTH x HEIGHT
+    # TODO: there should be a setting that changes sorting here / or maybe do it on the front end?
     items.sort(key=lambda x: (x['width'], x['height'], x['size']), reverse=True)
 
     #return [item[2] for item in items]
