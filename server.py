@@ -10,6 +10,7 @@
 import os
 from flask import Flask, send_from_directory, jsonify
 from PIL import Image
+import cv2
 
 dir_script = os.path.dirname(os.path.realpath(__file__))
 dir_templates = os.path.join(dir_script, "templates")
@@ -33,24 +34,41 @@ exts_videos = [
 
 exts_media = exts_images + exts_videos
 
+def get_media_dims(full_file_path):
+    if full_file_path.lower().endswith(tuple(exts_images)):
+        im = Image.open(full_file_path)
+        width, height = im.size
+        return width, height
+
+    if full_file_path.lower().endswith(tuple(exts_videos)):
+        vid = cv2.VideoCapture(file_path)
+        width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
+        height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        return width, height
+
+    return None, None
+
 def list_media_files(root, files):
     
     items = []
     for file in files:
         full_file_path = os.path.join(root, file)
 
-        if file.lower().endswith(tuple(exts_images)):
-            im = Image.open(full_file_path)
-            width, height = im.size
-            #media.append(file)
-            items.append([width, height, file, full_file_path])
-        if file.lower().endswith(tuple(exts_videos)):
-            items.append([0, 0, file, full_file_path])
+        width, height = get_media_dims(full_file_path)
+        if width and height:
+            size = os.path.getsize(full_file_path)
+            items.append({
+                'name': file,
+                'size': size,
+                'width': width,
+                'height': height,
+            })
     
     # show biggest files first by WIDTH x HEIGHT
-    items.sort(key=lambda x: (x[0], x[1]), reverse=True)
+    items.sort(key=lambda x: (x['width'], x['height'], x['size']), reverse=True)
 
-    return [item[2] for item in items]
+    #return [item[2] for item in items]
+    return items
 
 
 # Helper function to get all media files recursively

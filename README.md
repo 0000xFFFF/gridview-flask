@@ -13,6 +13,7 @@
 ## Requirements - pip
 * flask
 * pillow
+* opencv-python
 
 # Running
 ```

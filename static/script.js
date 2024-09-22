@@ -5,6 +5,8 @@ fetch('/media-list')
         const div_dirs = document.getElementById('media-dirs');
         directories.forEach(dir => {
             
+            let dir_path = dir.path === '.' ? '' : dir.path + '/';
+            
             const div_dir = document.createElement('div');
             div_dir.className = 'media-dir';
             
@@ -19,18 +21,44 @@ fetch('/media-list')
             div_dir_files.className = 'media-dir-files';
 
             dir.files.forEach(file => {
+                let name = file['name'];
                 const div_file = document.createElement('div');
                 div_file.className = 'media-file';
 
-                if (file.endsWith('.png') || file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.gif')) {
+                // info
+                let div_file_info = document.createElement('p');
+                div_file_info.className = 'media-file-info';
+                div_file_info.textContent = `${file.width}x${file.height}  ${file.name}`;
+                div_file.addEventListener('mouseover', function(event) {
+                    div_file_info.style.display = 'block';
+                    div_file_info.style.opacity = '1'; // Make it visible
+                });
+                div_file.addEventListener('mouseleave', function(event) {
+                    div_file_info.style.opacity = '0'; // Hide with transition
+                    setTimeout(() => {
+                        div_file_info.style.display = 'none'; // Hide after transition
+                    }, 300); // Match this to the duration of the CSS transition
+                })
+                div_file.append(div_file_info);
+
+                // content
+                if (name.endsWith('.png') || name.endsWith('.jpg') || name.endsWith('.jpeg') || name.endsWith('.gif')) {
                     const img = document.createElement('img');
-                    img.src = `/media/${dir.path === '.' ? '' : dir.path + '/'}${file}`;
+                    img.src = `/media/${dir_path}${name}`;
+                    img.onerror = () => {
+                        img.alt = "Image failed to load";
+                        //img.src = "/path/to/placeholder/image.png"; // maybe add placeholder
+                    };
                     div_file.appendChild(img);
-                } else if (file.endsWith('.mp4') || file.endsWith('.webm') || file.endsWith('.mov') || file.endsWith('.avi')) {
+                }
+                else if (name.endsWith('.mp4') || name.endsWith('.webm') || name.endsWith('.mov') || name.endsWith('.avi')) {
                     const video = document.createElement('video');
-                    video.src = `/media/${dir.path === '.' ? '' : dir.path + '/'}${file}`;
+                    video.src = `/media/${dir_path}${name}`;
                     video.controls = true;
                     div_file.appendChild(video);
+                }
+                else {
+                    // todo: handle other file types maybe?
                 }
 
                 div_dir_files.appendChild(div_file);

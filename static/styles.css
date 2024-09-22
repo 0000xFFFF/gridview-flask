@@ -1,29 +1,21 @@
 :root {
     --main-color-background: #101010;
-    --main-color-comments: #151515;
-    --main-color-white: #d6d6d6;
-    --main-color-yellow: #e5b567;
-    --main-color-green: #b4d273;
-    --main-color-orange: #e87d3e;
-    --main-color-purple: #9e86c8;
-    --main-color-pink: #b05279;
-    --main-color-blue: #6c99bb;
-    --main-color-high: #ff838e;
+    --main-color-dir-head: #e5b567;
+    --main-color-file-info: #d6d6d6;
 }
 
 body {
     font-family: monospace;
-    color: var(--main-color-white);
+    color: var(--main-color-file-info);
     background-color: var(--main-color-background)
 }
 h1 {
     text-align: left;
-    color: var(--main-color-orange);
-    border-bottom: 2px solid var(--main-color-blue);
+    color: var(--main-color-dir-head);
+    border-bottom: 2px solid var(--main-color-dir-head);
     padding: 3px 3px 3px 10px;
     margin: 0;
 }
-
 
 .media-dir-files {
     column-count: 6; /* Number of columns, adjust as needed */
@@ -41,4 +33,14 @@ h1 {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.media-file-info {
+    position: absolute;
+    margin: 0;
+    padding: 2px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: var(--main-color-file-info);
+    display: none; /* Hide by default */
+    transition: opacity 0.3s ease;
 }
