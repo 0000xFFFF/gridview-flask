@@ -42,28 +42,26 @@ fetch('/media-list')
     .catch(error => console.error('Error fetching media list:', error));
 
 
-document.addEventListener("DOMContentLoaded", function () {
-    const mediaDirFiles = document.querySelector('.media-dir-files');
-    const mediaFiles = document.querySelectorAll('.media-file');
-
-    function adjustMasonry() {
-        let columnHeights = [];
-
-        mediaFiles.forEach(file => {
-            const media = file.querySelector('img, video');
-            if (media.complete) {
-                const height = media.clientHeight;
-                file.style.gridRowEnd = `span ${Math.ceil(height / 10)}`;
-            } else {
-                media.onload = () => {
-                    const height = media.clientHeight;
-                    file.style.gridRowEnd = `span ${Math.ceil(height / 10)}`;
-                };
-            }
-        });
-    }
-
-    // Adjust on load and on window resize
-    window.addEventListener('load', adjustMasonry);
-    window.addEventListener('resize', adjustMasonry);
-});
+// // might need in the future idk
+// document.addEventListener("DOMContentLoaded", function () {
+//     const mediaDirFiles = document.querySelector('.media-dir-files');
+//     const mediaFiles = document.querySelectorAll('.media-file');
+//     function adjustMasonry() {
+//         let columnHeights = [];
+//         mediaFiles.forEach(file => {
+//             const media = file.querySelector('img, video');
+//             if (media.complete) {
+//                 const height = media.clientHeight;
+//                 file.style.gridRowEnd = `span ${Math.ceil(height / 10)}`;
+//             } else {
+//                 media.onload = () => {
+//                     const height = media.clientHeight;
+//                     file.style.gridRowEnd = `span ${Math.ceil(height / 10)}`;
+//                 };
+//             }
+//         });
+//     }
+//     // Adjust on load and on window resize
+//     window.addEventListener('load', adjustMasonry);
+//     window.addEventListener('resize', adjustMasonry);
+// });

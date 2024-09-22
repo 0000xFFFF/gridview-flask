@@ -4,6 +4,8 @@
 # TODO: add display paging
 # TODO: video loading is slow -- maybe cache thumbnails
 # TODO: add 'view file page' when file is clicked to see it's details
+# TODO: or add file info on hover with mouse
+# TODO: add image resize like RES
 
 import os
 from flask import Flask, send_from_directory, jsonify
