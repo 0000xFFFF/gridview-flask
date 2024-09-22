@@ -24,18 +24,22 @@ h1 {
     margin: 0;
 }
 
-.media-dir {
-    background-color: var(--main-color-comments);
-    border: 1px solid var(--main-color-blue);
-    margin: 2px;
+
+.media-dir-files {
+    column-count: 6; /* Number of columns, adjust as needed */
+    column-gap: 5px; /* Space between the columns */
+    margin: 20px;
 }
 
 .media-file {
-    margin: 10px;
     display: inline-block;
+    margin-bottom: 5px; /* Space between items */
+    width: 100%;
 }
 
-img, video {
-    max-width: 300px;
-    max-height: 300px;
+.media-file img,
+.media-file video {
+    width: 100%;
+    height: auto;
+    display: block;
 }
