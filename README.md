@@ -12,6 +12,7 @@
 
 ## Requirements - pip
 * flask
+* pillow
 
 # Running
 ```

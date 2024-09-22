@@ -5,8 +5,9 @@
 # TODO: video loading is slow -- maybe cache thumbnails
 # TODO: add 'view file page' when file is clicked to see it's details
 
-from flask import Flask, send_from_directory, jsonify
 import os
+from flask import Flask, send_from_directory, jsonify
+from PIL import Image
 
 dir_script = os.path.dirname(os.path.realpath(__file__))
 dir_templates = os.path.join(dir_script, "templates")
@@ -21,10 +22,33 @@ app = Flask(
 # Folder to serve media files from
 MEDIA_FOLDER = os.getcwd()
 
-extensions = [
+exts_images = [
     '.png', '.jpg', '.jpeg', '.gif',
+]
+exts_videos = [
     '.mp4', ".webm", '.mov', '.avi',
 ]
+
+exts_media = exts_images + exts_videos
+
+def list_media_files(root, files):
+    
+    items = []
+    for file in files:
+        full_file_path = os.path.join(root, file)
+
+        if file.lower().endswith(tuple(exts_images)):
+            im = Image.open(full_file_path)
+            width, height = im.size
+            #media.append(file)
+            items.append([width, height, file, full_file_path])
+        if file.lower().endswith(tuple(exts_videos)):
+            items.append([0, 0, file, full_file_path])
+    
+    # show biggest files first by WIDTH x HEIGHT
+    items.sort(key=lambda x: (x[0], x[1]), reverse=True)
+
+    return [item[2] for item in items]
 
 
 # Helper function to get all media files recursively
@@ -34,7 +58,7 @@ def get_media_files(directory):
         relative_path = os.path.relpath(root, MEDIA_FOLDER)
         media_files.append({
             'path': relative_path,
-            'files': [f for f in files if f.lower().endswith(tuple(extensions))]
+            'files': list_media_files(root, files)
         })
     return media_files
 
