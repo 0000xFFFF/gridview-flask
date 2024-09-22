@@ -28,7 +28,6 @@ h1 {
 .media-dir-files {
     column-count: 6; /* Number of columns, adjust as needed */
     column-gap: 5px; /* Space between the columns */
-    margin: 20px;
 }
 
 .media-file {
