@@ -87,7 +87,6 @@ fetch('/media-list')
                         img_popup.style.display = 'block';
                     });
                     div_file.addEventListener('mouseleave', function () {
-                        if (!setting_hoverZoom) { return; }
                         img_popup.src = '';
                         img_popup.style.display = 'none';
                     })
