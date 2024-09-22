@@ -1,29 +1,23 @@
 // settings here
 let setting_hoverZoom = false;
 
-function topright_controls() {
-    // top right container
-	let div_trcont = document.createElement("div");
-	div_trcont.id = "trcont";
-	div_trcont.style = "position: fixed; top: 5px; right: 5px;";
+function topright_controls_setup() {
+    
+    let topbar = document.getElementById('topbar');
+    let prevScrollPos = window.scrollY;
 
-	let label = document.createElement("label");
-	label.className = "checkboxContainer";
-	label.title = "enable zoom on hover";
-	label.id = "trcheckbox";
-	let input = document.createElement("input");
-	input.type = "checkbox";
-	input.checked = setting_hoverZoom;
-	input.addEventListener("change", function() { setting_hoverZoom = !setting_hoverZoom; });
-	let span = document.createElement("span");
-	span.className = "checkmark";
-	label.appendChild(input);
-	label.appendChild(span);
-    div_trcont.append(label);
-    document.body.appendChild(div_trcont);
+    window.onscroll = function() {
+        const currentScrollPos = window.scrollY;
+        topbar.style.top = prevScrollPos > currentScrollPos ?  "0" : "-60px";
+        prevScrollPos = currentScrollPos;
+    };
+
+    let setting_cb_hoverZoom = document.getElementById('setting_cb_hoverZoom')
+	setting_cb_hoverZoom.checked = setting_hoverZoom;
+	setting_cb_hoverZoom.addEventListener("change", function() { setting_hoverZoom = !setting_hoverZoom; });
 }
 
-topright_controls();
+topright_controls_setup();
 
 fetch('/media-list')
     .then(response => response.json())
