@@ -106,7 +106,7 @@ h1 {
 	width: 13px;
 	background-color: #202020;
 	border: 2px var(--main-color-dir-head) solid;
-	border-radius: 3px;
+	border-radius: 100%;
 	transition: all .2s ease;
 }
 .checkboxContainer:hover input ~ .checkmark { background-color: #101010; }

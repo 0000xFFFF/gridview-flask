@@ -7,6 +7,7 @@
 # TODO: new setting: change column count
 
 import os
+import sys
 from flask import Flask, send_from_directory, jsonify
 from PIL import Image
 import cv2
@@ -34,17 +35,20 @@ exts_videos = [
 exts_media = exts_images + exts_videos
 
 def get_media_dims(full_file_path):
-    if full_file_path.lower().endswith(tuple(exts_images)):
-        im = Image.open(full_file_path)
-        width, height = im.size
-        return width, height
+    try:
+        if full_file_path.lower().endswith(tuple(exts_images)):
+            im = Image.open(full_file_path)
+            width, height = im.size
+            return width, height
 
-    # ignore video for now
-    # if full_file_path.lower().endswith(tuple(exts_videos)):
-    #     vid = cv2.VideoCapture(full_file_path)
-    #     width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
-    #     height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
-    #     return width, height
+        # ignore video for now
+        # if full_file_path.lower().endswith(tuple(exts_videos)):
+        #     vid = cv2.VideoCapture(full_file_path)
+        #     width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
+        #     height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
+        #     return width, height
+    except:
+        sys.stderr.write(f"can't load: {full_file_path}\n")
 
     return None, None
 
