@@ -1,23 +1,40 @@
 // settings here
 let setting_hoverZoom = false;
+let setting_cols      = 6
 
-function topright_controls_setup() {
+function topbar_setup() {
     
     let topbar = document.getElementById('topbar');
-    let prevScrollPos = window.scrollY;
 
+    // hide topbar on scroll
+    let prevScrollPos = window.scrollY;
     window.onscroll = function() {
         const currentScrollPos = window.scrollY;
         topbar.style.top = prevScrollPos > currentScrollPos ?  "0" : "-60px";
         prevScrollPos = currentScrollPos;
     };
 
-    let setting_cb_hoverZoom = document.getElementById('setting_cb_hoverZoom')
+    // setting: hover zoom
+    let setting_cb_hoverZoom = document.getElementById('setting_cb_hoverZoom');
 	setting_cb_hoverZoom.checked = setting_hoverZoom;
 	setting_cb_hoverZoom.addEventListener("change", function() { setting_hoverZoom = !setting_hoverZoom; });
+    
+    // setting: dir files cols
+    function updateSlider() {
+        setting_slider_cols_label.innerHTML = setting_cols = setting_slider_cols.value;
+        let mediaDirFiles = document.querySelectorAll('.media-dir-files')
+        mediaDirFiles.forEach(element => {
+            element.style.columnCount = setting_cols;
+        });
+    }
+    let setting_slider_cols = document.getElementById('setting_slider_cols');
+    setting_slider_cols.value = setting_cols;
+    let setting_slider_cols_label = document.getElementById('setting_slider_cols_label');
+    setting_slider_cols.oninput = updateSlider;
+    updateSlider();
 }
 
-topright_controls_setup();
+topbar_setup();
 
 fetch('/media-list')
     .then(response => response.json())
