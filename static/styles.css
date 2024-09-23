@@ -40,7 +40,7 @@ h1 {
 }
 
 .media-file-info {
-    z-index: 10;
+    z-index: 2;
     position: absolute;
     margin: 0;
     padding: 2px;
@@ -51,9 +51,11 @@ h1 {
 }
 
 .media-file-popup {
+	display: none;
     position: fixed;
     top: 30px;
     left: 0;
+    z-index: 3;
     pointer-events: none;
     margin: 10px;
     max-height: 95vh;

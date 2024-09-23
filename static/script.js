@@ -52,6 +52,11 @@ function topbar_setup() {
 
 topbar_setup();
 
+// define image popup
+const img_popup = document.createElement('img');
+img_popup.className = 'media-file-popup';
+document.body.appendChild(img_popup);
+
 fetch('/media-list')
     .then(response => response.json())
     .then(directories => {
@@ -105,9 +110,6 @@ fetch('/media-list')
                     div_file.appendChild(img);
 
                     // image popup on hover
-                    const img_popup = document.createElement('img');
-                    img_popup.className = 'media-file-popup';
-                    document.body.appendChild(img_popup);
                     div_file.addEventListener('mouseenter', function () {
                         if (!setting_hoverZoom) { return; }
                         img_popup.src = img.src;
