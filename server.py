@@ -9,7 +9,12 @@ import os
 import sys
 from flask import Flask, send_from_directory, jsonify
 from PIL import Image
-import cv2
+#import cv2
+
+# disable logging
+import logging
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.ERROR)
 
 dir_script = os.path.dirname(os.path.realpath(__file__))
 dir_templates = os.path.join(dir_script, "templates")
