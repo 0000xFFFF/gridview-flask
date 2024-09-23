@@ -15,23 +15,39 @@ function topbar_setup() {
     };
 
     // setting: hover zoom
-    let setting_cb_hoverZoom = document.getElementById('setting_cb_hoverZoom');
-	setting_cb_hoverZoom.checked = setting_hoverZoom;
-	setting_cb_hoverZoom.addEventListener("change", function() { setting_hoverZoom = !setting_hoverZoom; });
+    let cb_hoverZoom = document.getElementById('setting_cb_hoverZoom');
+	cb_hoverZoom.checked = setting_hoverZoom;
+	cb_hoverZoom.addEventListener("change", function() { setting_hoverZoom = !setting_hoverZoom; });
+    function hoverZoom_check() { setting_hoverZoom = cb_hoverZoom.checked = !cb_hoverZoom.checked; }
     
-    // setting: dir files cols
-    function updateSlider() {
-        setting_slider_cols_label.innerHTML = setting_cols = setting_slider_cols.value;
+    // setting: media cols slider
+    let slider = document.getElementById('setting_slider_cols');
+    let slider_label = document.getElementById('setting_slider_cols_label');
+    function slider_update() {
+        slider_label.innerHTML = setting_cols = slider.value;
         let mediaDirFiles = document.querySelectorAll('.media-dir-files')
-        mediaDirFiles.forEach(element => {
-            element.style.columnCount = setting_cols;
-        });
+        mediaDirFiles.forEach(element => { element.style.columnCount = setting_cols; });
     }
-    let setting_slider_cols = document.getElementById('setting_slider_cols');
-    setting_slider_cols.value = setting_cols;
-    let setting_slider_cols_label = document.getElementById('setting_slider_cols_label');
-    setting_slider_cols.oninput = updateSlider;
-    updateSlider();
+    function slider_left()  { slider.value = Math.max(Number(slider.value) - Number(slider.step), slider.min); slider_update(); }
+    function slider_right() { slider.value = Math.min(Number(slider.value) + Number(slider.step), slider.max); slider_update(); }
+    slider.value = setting_cols;
+    slider.oninput = slider_update;
+    slider.addEventListener('wheel', function (event) {
+        if (event.deltaY < 0) { slider_left();  }
+        else                  { slider_right(); }
+        event.preventDefault();
+    });
+    slider_update();
+
+    // setting up keyboard events for topbar
+    document.addEventListener('keydown', (event) => {
+        console.log(event.key);
+        switch (event.key) {
+            case 'p': hoverZoom_check(); break;
+            case 'ArrowLeft':  slider_left();  break;
+            case 'ArrowRight': slider_right(); break;
+        }
+    });
 }
 
 topbar_setup();
