@@ -4,7 +4,6 @@
 # TODO: video loading is slow -- maybe cache thumbnails
 # TODO: add 'view file page' when file is clicked to see it's details
 # TODO: new setting: change sorting order
-# TODO: new setting: change column count
 
 import os
 import sys
