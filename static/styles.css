@@ -37,6 +37,8 @@ h1 {
     width: 100%;
     height: auto;
     display: block;
+	max-width: 95vw;
+	max-height: 95vh;
 }
 
 .media-file-info {
