@@ -2,7 +2,7 @@
 
 [![Python 3.12.5](https://img.shields.io/badge/Python-3.12.5-yellow.svg)](http://www.python.org/download/)
 
-<img src="preview/preview.png" width="700" height="700">
+<img src="preview/preview.gif" width="800" height="800">
 
 # Installation
 ```
