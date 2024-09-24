@@ -1,4 +1,6 @@
-# gridview - masonry grid layout image viewer
+project development moved to: [gridview](https://github.com/0000xFFFF/gridview) (electron app)
+
+# gridview-flask - masonry grid layout image viewer
 
 [![Python 3.12.5](https://img.shields.io/badge/Python-3.12.5-yellow.svg)](http://www.python.org/download/)
 
