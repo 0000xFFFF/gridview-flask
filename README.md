@@ -8,7 +8,7 @@ project development moved to: [gridview](https://github.com/0000xFFFF/gridview) 
 
 # Installation
 ```
-./setup-env.sh
+./setup-venv.sh
 ./install.sh
 ```
 
